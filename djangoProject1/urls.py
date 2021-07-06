@@ -14,12 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf.urls.static import static
 from django.urls import path, include
 
 import todolist.urls as todo_urls
+from djangoProject1 import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('todo/', include(todo_urls, namespace="todo")),
     path('api-auth/', include('rest_framework.urls'))
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
